@@ -8,9 +8,7 @@ load_dotenv(find_dotenv())
 
 from PIL import Image
 import pytesseract # OCR tool
-pytesseract.pytesseract.tesseract_cmd = (
-    r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-)
+
 
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
