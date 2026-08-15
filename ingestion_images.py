@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 import tempfile
 import uuid
-
+import shutil
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
