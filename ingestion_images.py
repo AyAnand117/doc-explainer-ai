@@ -33,6 +33,11 @@ The pipeline:
 Returns :
     str : The Chroma collection name for the uploaded image.
 """
+
+if os.name == "nt":
+    pytesseract.pytesseract.tesseract_cmd = (
+        r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+    )
 CHROMA_DIR = "chroma_store"
 #COLLECTION = "yourdocs"
 EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
