@@ -6,13 +6,17 @@ import uuid
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
-from PIL import image
+from PIL import Image
 import pytesseract # OCR tool
+pytesseract.pytesseract.tesseract_cmd = (
+    r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+)
 
 from langchain_core.documents import Document
-from lanchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
+
 
 
 """ 
@@ -68,7 +72,7 @@ def ingest_image(uploaded_file):
 
         print("Chunking document...")
         text_splitter = RecursiveCharacterTextSplitter(
-            separator = ["\n\n","\n","."," "],
+            separators = ["\n\n","\n","."," "],
             chunk_size = CHUNK_SIZE,
             chunk_overlap = CHUNK_OVERLAP,
         )
@@ -78,7 +82,7 @@ def ingest_image(uploaded_file):
         print("Creating embedding model...")
         embeddings = HuggingFaceEmbeddings(model_name=EMBED_MODEL)
 
-        print(f"Embedding and storing in Chroma collection '{COLLECTION}'...")
+        print(f"Embedding and storing in Chroma collection '{collection_name}'...")
         vectorstore = Chroma.from_documents(
             documents = chunks,
             embedding = embeddings,
