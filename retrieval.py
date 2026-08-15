@@ -17,5 +17,5 @@ def get_retriever(collection_name):
         )
 
     print("Creating retriever...")
-    retriever = vectorstore.as_retriever(search_kwargs={"k":4})
+    retriever = vectorstore.as_retriever(search_kwargs={"k":4}) # returns top 4 chunks for every query
     return retriever
