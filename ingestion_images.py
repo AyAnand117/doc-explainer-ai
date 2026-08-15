@@ -36,6 +36,13 @@ if os.name == "nt":
     pytesseract.pytesseract.tesseract_cmd = (
         r"C:\Program Files\Tesseract-OCR\tesseract.exe"
     )
+else:
+    tesseract_path = shutil.which("tesseract")
+    if tesseract_path:
+        pytesseract.pytesseract.tesseract_cmd = tesseract_path
+    else:
+        raise FileNotFoundError("Tesseract-OCR is not installed or not found in PATH")
+
 CHROMA_DIR = "chroma_store"
 #COLLECTION = "yourdocs"
 EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
