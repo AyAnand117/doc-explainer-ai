@@ -1,7 +1,7 @@
 # Here we build the RAG chain
 
 from langchain_groq import ChatGroq
-from langchain_core import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 llm = ChatGroq(
@@ -15,10 +15,11 @@ prompt = ChatPromptTemplate.from_template(
     
     Answer ONLY from the provided context.
     If the answer is not in the context, say:
-    "I could not find the answer in the uploaded document."
+    "I could not find the answer in the uploaded document or image."
 
     Context: {context}
     Question: {question}
+    Answer:
     """
 )
 
