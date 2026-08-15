@@ -3,9 +3,12 @@ warnings.filterwarnings("ignore")
 import os
 os.environ["TRANSFORMERS_VERBOSITY"] = "error"
 import tempfile
-#from dotenv import load_dotenv, find_dotenv
-#load_dotenv(find_dotenv())
+
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
+
 import uuid
+
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings

@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+docreader/
+venv/
+env/
+.venv/
+
+# Environment variables
+.env
+
+# Chroma vector database
+chroma_store/
+
+# Temporary files
+*.tmp
+*.temp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE/editor
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# Streamlit cache
+.streamlit/secrets.toml
+
+rough.txt
+

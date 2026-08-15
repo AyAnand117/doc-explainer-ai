@@ -3,6 +3,9 @@ from pathlib import Path
 import tempfile
 import uuid
 
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
+
 from PIL import image
 import pytesseract # OCR tool
 
