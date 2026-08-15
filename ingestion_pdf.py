@@ -12,21 +12,32 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 
 """ 
-Ingests data/document.pdf into 'yourdocs' chroma collection.
-Applies RecursiveCharacterTextSplitter to chunk the document.
-Run once (or after regenrating the PDF) : python ingestion.py
+Processes a user-uploaded PDF and stores it in a unique Chroma vector collection.
+
+The pipeline:
+1. Saves the uploaded PDF to a temporary file.
+2. Extracts text using PyPDFLoader.
+3. Splits the document into overlapping chunks.
+4. Generates embeddings using HuggingFaceEmbeddings.
+5. Stores the embeddings in a uniquely named Chroma collection.
+
+Returns :
+    str : The Chroma collection name for the uploaded document.
+    None: If ingestion fails. 
 """
+
 CHROMA_DIR = "chroma_store"
 #COLLECTION = "yourdocs"
-PDF_PATH = os.path.join("data", "document.pdf")
+#PDF_PATH = os.path.join("data", "document.pdf")
 EMBED_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
-
 CHUNK_SIZE = 600
 CHUNK_OVERLAP = 100
 
+
+
 def ingest_pdf(uploaded_file):
 
-    collection_name = f"doc_{uuid.uuid().hex}"
+    collection_name = f"doc_{uuid.uuid4().hex}"
 
     with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
         tmp_file.write(uploaded_file.getbuffer())
