@@ -28,19 +28,47 @@ prompt = ChatPromptTemplate.from_template(
     {question}
 
     Rules:
-    - Answer using the document context when appropriate.
-    - Use the conversation history to understand follow-up questions.
-    - Do not invent information.
-    - If the answer isn't available in the document, say:
-      "I could not find the answer in the uploaded document."
+
+    1. Answer using the document context when the question relates
+        to the uploaded document or image.
+
+    2. Use the recent conversation to understand follow-up questions
+        and references such as:
+        - "it"
+        - "that"
+        - "the previous point"
+        - "the second section"
+        - "explain this further"
+
+    3. Do not invent information that is not supported by the
+        document context.
+
+    4. If the answer cannot be found in the document context, say:
+
+        "I could not find the answer in the uploaded document."
+
+    5. Keep the answer clear and concise.
     """
 )
 
-# Define parser
+
 parser = StrOutputParser()
 
 def answer_question(retriever, question, chat_history):
+    """
+        Retrieves relevant document chunks and generates an answer
+        using the uploaded document and recent conversation history.
 
+        Args:
+            retriever: Chroma retriever for the current document.
+            question: User's current question.
+            chat_history: Recent conversation messages.
+
+        Returns:
+            tuple:
+                answer: Generated response.
+                docs: Retrieved document chunks.
+    """
     docs = retriever.invoke(question)
 
     context = "\n\n".join(doc.page_content for doc in docs)
