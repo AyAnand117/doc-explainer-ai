@@ -1,16 +1,16 @@
 # EasySummarizer 📚
 
-EasySummarizer was a multimodal AI-powered document assistant that was developed to allow users to upload PDF documents or images and ask questions about their contents.
+EasySummarizer is a multimodal AI-powered document assistant that is developed to allow users to upload PDF documents or images and ask questions about their contents.
 
-The application used **Retrieval-Augmented Generation (RAG)** to retrieve relevant information from uploaded files and generate grounded responses using an LLM. It also supported OCR-based image processing and short-term conversational memory.
+The application uses **Retrieval-Augmented Generation (RAG)** to retrieve relevant information from uploaded files and generate grounded responses using an LLM. It also supports OCR-based image processing and short-term conversational memory.
 
-The application was deployed using **Streamlit Community Cloud**.
+The application is deployed using **Streamlit Community Cloud**.
 
 ---
 
 ## 🚀 Features
 
-EasySummarizer provided the following features:
+EasySummarizer provides the following features:
 
 * PDF document upload
 * Image upload
@@ -34,7 +34,7 @@ EasySummarizer provided the following features:
 
 ## 🏗️ Architecture
 
-The application followed a modular RAG architecture.
+The application follows a modular RAG architecture.
 
 ```text
                     EasySummarizer
@@ -75,23 +75,23 @@ The application followed a modular RAG architecture.
 
 ## 🔄 RAG Pipeline
 
-The document processing pipeline followed these stages:
+The document processing pipeline follows these stages:
 
 ### 1. Document Upload
 
-Users uploaded either a PDF document or an image through the Streamlit interface.
+Users upload either a PDF document or an image through the Streamlit interface.
 
 ### 2. Text Extraction
 
-For PDFs, `PyPDFLoader` was used to extract the document text.
+For PDFs, `PyPDFLoader` is used to extract the document text.
 
-For images, **Tesseract OCR** was used to extract textual information.
+For images, **Tesseract OCR** is used to extract textual information.
 
 ### 3. Chunking
 
-The extracted text was divided into smaller overlapping chunks using `RecursiveCharacterTextSplitter`.
+The extracted text is divided into smaller overlapping chunks using `RecursiveCharacterTextSplitter`.
 
-The following configuration was used:
+The following configuration is used:
 
 ```text
 Chunk size: 600
@@ -100,7 +100,7 @@ Chunk overlap: 100
 
 ### 4. Embeddings
 
-Each text chunk was converted into a vector representation using:
+Each text chunk is converted into a vector representation using:
 
 ```text
 sentence-transformers/all-MiniLM-L6-v2
@@ -108,31 +108,31 @@ sentence-transformers/all-MiniLM-L6-v2
 
 ### 5. Vector Storage
 
-The generated embeddings were stored in a **Chroma vector database**.
+The generated embeddings are stored in a **Chroma vector database**.
 
-Each uploaded file was assigned a unique Chroma collection to prevent different documents from being mixed together.
+Each uploaded file is assigned a unique Chroma collection to prevent different documents from being mixed together.
 
 ### 6. Retrieval
 
-When a user asked a question, the question was embedded and compared against the stored vectors.
+When a user asks a question, the question is embedded and compared against the stored vectors.
 
-The system retrieved the **top 4 most relevant chunks**.
+The system retrieves the **top 4 most relevant chunks**.
 
 ### 7. Generation
 
-The retrieved chunks were provided as context to the Groq-hosted LLM.
+The retrieved chunks are provided as context to the Groq-hosted LLM.
 
-The model was instructed to answer using the retrieved context and avoid inventing information that was not present in the uploaded content.
+The model is instructed to answer using the retrieved context and avoid inventing information that is not present in the uploaded content.
 
 ---
 
 ## 🧠 Short-Term Conversation Memory
 
-EasySummarizer supported short-term conversational memory using Streamlit's `session_state`.
+EasySummarizer supports short-term conversational memory using Streamlit's `session_state`.
 
-The application retained the most recent conversation messages and passed them to the LLM along with the retrieved document context.
+The application retains the most recent conversation messages and passes them to the LLM along with the retrieved document context.
 
-This allowed users to ask follow-up questions such as:
+This allows users to ask follow-up questions such as:
 
 ```text
 User:
@@ -148,15 +148,15 @@ Assistant:
 The exceptions included...
 ```
 
-The assistant was therefore able to use the previous conversation to understand references and follow-up questions.
+The assistant is therefore able to use the previous conversation to understand references and follow-up questions.
 
-The conversation history was cleared whenever the user uploaded a new document or selected the clear-file option.
+The conversation history is cleared whenever the user uploads a new document or selects the clear-file option.
 
 ---
 
 ## 🖼️ Image Processing
 
-Images were processed using an OCR pipeline.
+Images are processed using an OCR pipeline.
 
 ```text
 Image Upload
@@ -178,7 +178,7 @@ Chroma
 Retrieval
 ```
 
-The image itself was also displayed as a preview in the Streamlit application.
+The image itself is also displayed as a preview in the Streamlit application.
 
 The OCR pipeline was particularly suitable for:
 
@@ -231,7 +231,7 @@ projectabc/
 
 ### `app.py`
 
-The main Streamlit application was responsible for:
+The main Streamlit application is responsible for:
 
 * UI rendering
 * File uploads
@@ -243,7 +243,7 @@ The main Streamlit application was responsible for:
 
 ### `ingestion_pdf.py`
 
-The PDF ingestion module was responsible for:
+The PDF ingestion module is responsible for:
 
 * Processing uploaded PDFs
 * Extracting text
@@ -253,7 +253,7 @@ The PDF ingestion module was responsible for:
 
 ### `ingestion_images.py`
 
-The image ingestion module was responsible for:
+The image ingestion module is responsible for:
 
 * Processing uploaded images
 * Running Tesseract OCR
@@ -264,7 +264,7 @@ The image ingestion module was responsible for:
 
 ### `retrieval.py`
 
-The retrieval module was responsible for:
+The retrieval module is responsible for:
 
 * Loading the appropriate Chroma collection
 * Loading the embedding model
@@ -273,7 +273,7 @@ The retrieval module was responsible for:
 
 ### `qa_chain.py`
 
-The question-answering module was responsible for:
+The question-answering module is responsible for:
 
 * Loading the Groq LLM
 * Constructing the RAG prompt
@@ -284,23 +284,23 @@ The question-answering module was responsible for:
 
 ## 🔐 Security
 
-API credentials were kept outside the source code.
+API credentials are kept outside the source code.
 
-During local development, environment variables were used through `.env`.
+During local development, environment variables are used through `.env`.
 
-For Streamlit Community Cloud deployment, the Groq API key was stored using **Streamlit Secrets**.
+For Streamlit Community Cloud deployment, the Groq API key is stored using **Streamlit Secrets**.
 
-The `.env` file was excluded from GitHub using `.gitignore`.
+The `.env` file is excluded from GitHub using `.gitignore`.
 
-Generated Chroma data and the local virtual environment were also excluded from version control.
+Generated Chroma data and the local virtual environment are also excluded from version control.
 
 ---
 
 ## ☁️ Deployment
 
-The application was deployed using **Streamlit Community Cloud**.
+The application is deployed using **Streamlit Community Cloud**.
 
-The deployment required:
+The deployment requires:
 
 ```text
 requirements.txt
@@ -320,13 +320,13 @@ The `packages.txt` file contained:
 tesseract-ocr
 ```
 
-This allowed the OCR functionality to run in the Linux-based Streamlit deployment environment.
+This allows the OCR functionality to run in the Linux-based Streamlit deployment environment.
 
 ---
 
 ## ⚙️ Local Setup
 
-The project was developed using a Python virtual environment.
+The project is developed using a Python virtual environment.
 
 The dependencies were installed using:
 
@@ -340,29 +340,29 @@ The application was started using:
 streamlit run app.py
 ```
 
-The application was then accessed through the local Streamlit URL.
+The application is then accessed through the local Streamlit URL.
 
 ---
 
 ## 🔑 Environment Variables
 
-For local development, the Groq API key was stored in a `.env` file:
+For local development, the Groq API key is stored in a `.env` file:
 
 ```env
 GROQ_API_KEY="your_api_key"
 ```
 
-The `.env` file was not committed to GitHub.
+The `.env` file is not committed to GitHub.
 
-For Streamlit Cloud, the API key was added through the application's **Secrets** configuration.
+For Streamlit Cloud, the API key is added through the application's **Secrets** configuration.
 
 ---
 
 ## 🎯 Project Objective
 
-EasySummarizer was developed to demonstrate an end-to-end implementation of a **multimodal RAG application**.
+EasySummarizer is developed to demonstrate an end-to-end implementation of a **multimodal RAG application**.
 
-The project combined:
+The project combines:
 
 * Document ingestion
 * OCR
@@ -375,13 +375,13 @@ The project combined:
 * Streamlit application development
 * Cloud deployment
 
-The project demonstrated how unstructured user-provided content could be transformed into a searchable knowledge base and used to generate context-aware answers.
+The project demonstrates how unstructured user-provided content can be transformed into a searchable knowledge base and used to generate context-aware answers.
 
 ---
 
 ## 🔮 Future Improvements
 
-The following improvements were identified for future versions:
+The following improvements are identified for future versions:
 
 * Support for DOCX, PPTX and XLSX files
 * Vision-language model support for charts and diagrams
@@ -402,15 +402,15 @@ The following improvements were identified for future versions:
 
 ## 👨‍💻 Developer
 
-**EasySummarizer** was developed by **AnandAnalytics**.
+**EasySummarizer** is developed by **AnandAnalytics - Ayush Anand**.
 
-🌐 **anandanalytics.online**
+🌐 **[anandanalytics.online](https://anandanalytics.online/)**
 
 ---
 
 ## 📌 Key Learning Outcomes
 
-The project provided hands-on experience with the complete lifecycle of a modern RAG application:
+The project provides hands-on experience with the complete lifecycle of a modern RAG application:
 
 ```text
 Unstructured Data
@@ -432,4 +432,4 @@ LLM
 Conversational Response
 ```
 
-It demonstrated how individual GenAI components could be combined into a complete, deployable AI application rather than using an LLM as a standalone chatbot.
+It demonstrates how individual GenAI components can be combined into a complete, deployable AI application rather than using an LLM as a standalone chatbot.
