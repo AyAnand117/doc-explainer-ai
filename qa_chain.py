@@ -7,8 +7,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 llm = ChatGroq(
-    model = "llama-3.3-70b-versatile",
-    temperature = 0.01,
+    model = "qwen/qwen3.6-27b",
+    temperature = 0.05,
 )
 
 prompt = ChatPromptTemplate.from_template(
