@@ -9,7 +9,7 @@ from langchain_core.output_parsers import StrOutputParser
 llm = ChatGroq(
     model = "qwen/qwen3.6-27b",
     temperature = 0.05,
-    reasoning_effort = None,
+    reasoning_format="hidden",
 )
 
 prompt = ChatPromptTemplate.from_template(
