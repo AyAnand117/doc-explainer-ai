@@ -7,7 +7,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 llm = ChatGroq(
-    model = "qwen/qwen3.6-27b",
+    model = "qwen/qwen3.8-27b",
     temperature = 0.05,
     reasoning_format="hidden",
 )
