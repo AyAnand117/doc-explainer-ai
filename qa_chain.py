@@ -8,7 +8,7 @@ from langchain_core.output_parsers import StrOutputParser
 
 llm = ChatGroq(
     model = "qwen/qwen3.8-27b",
-    temperature = 0.05,
+    temperature = 0.1,
     reasoning_format="hidden",
 )
 
